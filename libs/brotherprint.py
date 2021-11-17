@@ -938,7 +938,7 @@ class BrotherPrint(object):
             file_str.write(b'\x00\x00\x00\x00')
             file_str.write(hex(c).encode())
             file_str.write(b'\x00')
-            file_str.write(data.encode())
+            file_str.write(data)
             self.send(file_str.getvalue())
         else:
             raise RuntimeError('Invalid parameters')
