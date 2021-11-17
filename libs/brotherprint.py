@@ -931,7 +931,7 @@ class BrotherPrint(object):
             m = model_type_choices[model_type]
             c = correction_choices[correction]
             file_str = BytesIO()
-            file_str.write(chr(27))
+            file_str.write(b'\x1B')
             file_str.write(b'iQ')
             file_str.write(hex(s))
             file_str.write(hex(m))
