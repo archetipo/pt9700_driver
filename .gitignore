@@ -13,7 +13,6 @@ jwt_setting.json
 .idea
 .env
 .env-test
-libs
 mdbdata
 service-app
 data_src
