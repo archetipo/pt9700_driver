@@ -2,9 +2,10 @@
 import logging
 import subprocess
 from threading import Thread, Lock
-from Queue import Queue, Empty
+from queue import Queue, Empty
 from datetime import datetime
 import json
+import time
 
 try:
     from .printer import USBPrinter
@@ -112,7 +113,7 @@ class BrotherDriver(Thread):
             return None
 
     def get_status(self):
-        self.push_task('status')
+        self.get_usb_printer()
         return self.status
 
     def set_status(self, status, message=None):
