@@ -204,8 +204,6 @@ class BrotherDriver(Thread):
         printer.alignment('center')
         printer.send(label['label'])
         printer.line_feed()
-        printer.qrcode(
-            label['data'].encode('utf8')
-        )
+        printer.qrcode(label['data'].encode('utf8'))
         printer.print_page('full')
 
