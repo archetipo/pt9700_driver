@@ -26,8 +26,7 @@ class USBPrinter(object):
         """ Search device on USB tree and set is as escpos device """
         self.device = usb.core.find(idVendor=self.idVendor, idProduct=self.idProduct)
         if self.device is None:
-            print
-            "Cable isn't plugged in"
+            print("Cable isn't plugged in")
             return
         check_driver = True
         try:
@@ -40,16 +39,14 @@ class USBPrinter(object):
                 self.device.set_configuration()
             except usb.core.USBError as e:
                 if check_driver is not None:
-                    print
-                    "Could not detatch kernel driver: %s" % str(e)
+                    print("Could not detatch kernel driver: %s" % str(e))
         cfg = self.device.get_active_configuration()
         intf = cfg[(0, 0)]
         self.out_ep = usb.util.find_descriptor(
             intf,
             custom_match=(
-                lambda e: \
-                    usb.util.endpoint_direction(e.bEndpointAddress) == \
-                    usb.util.ENDPOINT_OUT)
+                lambda e: usb.util.endpoint_direction(e.bEndpointAddress) == \
+                          usb.util.ENDPOINT_OUT)
         )
         self.in_ep = usb.util.find_descriptor(
             intf,
@@ -59,11 +56,9 @@ class USBPrinter(object):
                     usb.util.ENDPOINT_IN)
         )
         if self.out_ep is None:
-            print
-            "no  out end point"
+            print("no  out end point")
         if self.in_ep is None:
-            print
-            "no in end point"
+            print("no in end point")
         self.printer = BrotherPrint(
             self.device, self.out_ep, 'usb')
 
@@ -111,7 +106,7 @@ class USBPrinter(object):
         # self.device.write(self.out_ep, DLE_EOT_ERROR, self.interface)
         # error = self.__extract_status()
         # self.device.write(self.out_ep, DLE_EOT_PAPER, self.interface)
-     #   paper = self.__extract_status()
+        #   paper = self.__extract_status()
 
         status['printer']['status_code'] = printer
         # status['printer']['status_error'] = not ((printer & 147) == 18)
@@ -143,8 +138,6 @@ class USBPrinter(object):
         if self.device:
             self.close()
         self.device = None
-
-
 
 # printer = Printer(0x04f9, 0x203c)
 # printer.PrintBarcode('TEST','50052220')
