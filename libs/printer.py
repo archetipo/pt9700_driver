@@ -80,7 +80,7 @@ class USBPrinter(object):
 
     def __extract_status(self):
         maxiterate = 0
-        rep = self.device.read(self.in_ep, 20, self.interface).tolist()
+        rep = self.device.read(0x81,100000,1000).tolist()
         return rep
 
     def get_printer_status(self):
