@@ -51,9 +51,8 @@ class USBPrinter(object):
         self.in_ep = usb.util.find_descriptor(
             intf,
             custom_match=(
-                lambda e: \
-                    usb.util.endpoint_direction(e.bEndpointAddress) == \
-                    usb.util.ENDPOINT_IN)
+                lambda e: usb.util.endpoint_direction(e.bEndpointAddress) == \
+                          usb.util.ENDPOINT_IN)
         )
         if self.out_ep is None:
             print("no  out end point")
@@ -81,14 +80,7 @@ class USBPrinter(object):
 
     def __extract_status(self):
         maxiterate = 0
-        rep = None
-        while rep == None:
-            maxiterate += 1
-            if maxiterate > 10000:
-                raise NoStatusError()
-            r = self.device.read(self.in_ep, 20, self.interface).tolist()
-            while len(r):
-                rep = r.pop()
+        rep = self.device.read(self.in_ep, 20, self.interface).tolist()
         return rep
 
     def get_printer_status(self):
