@@ -110,8 +110,8 @@ class BrotherDriver(Thread):
             return None
 
     def get_status(self):
-        printer = self.get_usb_printer()
-        return printer.get_printer_status()
+        self.get_usb_printer()
+        return self.status
 
     def set_status(self, status, message=None):
         _logger.info(status + ' : ' + (message or 'no message'))
@@ -202,7 +202,7 @@ class BrotherDriver(Thread):
         printer.initialize()
         printer.compressed_char('on')
         printer.alignment('center')
-        printer.send(label['label'].encode('utf8'))
+        printer.send(label['label'])
         printer.line_feed()
         printer.qrcode(
             label['data'].encode('utf8')

@@ -81,6 +81,8 @@ class USBPrinter(object):
     def __extract_status(self):
         maxiterate = 0
         rep = self.device.read(self.in_ep, 32, 10).tolist()
+        rep = bytes(self.in_ep.read(32))
+
         return rep
 
     def get_printer_status(self):
@@ -122,7 +124,7 @@ class USBPrinter(object):
         # status['paper']['status_error'] = not ((paper & 147) == 18)
         # status['paper']['near_end'] = bool(paper & 12)
         # status['paper']['present'] = not bool(paper & 96)
-
+        print(status)
         return status
 
     def __del__(self):
