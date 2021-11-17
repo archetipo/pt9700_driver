@@ -6,14 +6,8 @@ from queue import Queue, Empty
 from datetime import datetime
 import json
 import time
+from printer import USBPrinter
 
-try:
-    from .printer import USBPrinter
-
-    escpos = True
-except ImportError:
-    print("Error")
-    escpos = None
 
 try:
     import usb.core
@@ -79,7 +73,7 @@ class BrotherDriver(Thread):
             printers = usb.core.find(find_all=True, idVendor=0x0519)
         for device in printers:
             try:
-                device.set_configuration()
+                # device.set_configuration()
                 connected.append({
                     'vendor': device.idVendor,
                     'product': device.idProduct,
