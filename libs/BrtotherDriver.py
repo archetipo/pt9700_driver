@@ -6,7 +6,7 @@ from queue import Queue, Empty
 from datetime import datetime
 import json
 import time
-from printer import USBPrinter
+from .printer import USBPrinter
 
 
 try:

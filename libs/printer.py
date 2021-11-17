@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from brotherprint import *
+from .brotherprint import *
 import usb.core
 import usb.util
 
