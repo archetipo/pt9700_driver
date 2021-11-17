@@ -110,8 +110,8 @@ class BrotherDriver(Thread):
             return None
 
     def get_status(self):
-        self.get_usb_printer()
-        return self.status
+        printer = self.get_usb_printer()
+        return printer.get_printer_status()
 
     def set_status(self, status, message=None):
         _logger.info(status + ' : ' + (message or 'no message'))
