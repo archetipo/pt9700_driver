@@ -6,6 +6,8 @@ from queue import Queue, Empty
 from datetime import datetime
 import json
 import time
+import traceback
+
 from .printer import USBPrinter
 
 
@@ -128,10 +130,6 @@ class BrotherDriver(Thread):
             _logger.warning('ESC/POS Device Disconnected: ' + message)
 
     def run(self):
-        printer = None
-        if not escpos:
-            _logger.error('Printer cannot initialize, please verify system dependencies.')
-            return
         while True:
             try:
                 error = True
