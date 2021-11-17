@@ -888,10 +888,10 @@ class BrotherPrint(object):
         n1 = height % 256
         if (format in barcodes and width in widths and ratio in ratios and characters in character_choices
                 and rss_symbol in rss_symbols):
-            sendstr += (chr(27) + 'i' + 't' + barcodes[format] + 's' + 'p' + 'r' + character_choices[characters] +
-                        'u' + 'x' + 'y' + 'h' + chr(n1) + chr(n2) + 'w' + widths[width] + 'e' +
-                        parentheses_choices[parentheses] + 'o' + rss_symbols[rss_symbol] + 'c' + chr(horiz_char_rss) +
-                        'z' + ratios[ratio] + 'f' + equalize_choices[equalize] + 'b' + data + chr(92))
+            sendstr += (chr(27) + b'i' + b't' + barcodes[format] + b's' + b'p' + b'r' + character_choices[characters] +
+                        b'u' + b'x' + b'y' + b'h' + chr(n1) + chr(n2) + b'w' + widths[width] + b'e' +
+                        parentheses_choices[parentheses] + b'o' + rss_symbols[rss_symbol] + b'c' + chr(horiz_char_rss) +
+                        b'z' + ratios[ratio] + b'f' + equalize_choices[equalize] + b'b' + data + chr(92))
             if format in ['code128', 'gs1-128']:
                 sendstr += chr(92) + chr(92)
             self.send(sendstr)
