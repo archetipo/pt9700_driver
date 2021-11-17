@@ -928,10 +928,10 @@ class BrotherPrint(object):
             s = size_choices[size]
             m = model_type_choices[model_type]
             c = correction_choices[correction]
+            options = '' + hex(s) + hex(m) + hex(0) + hex(0) + hex(0) + hex(c) + hex(0)
             sendstr += (
-                    chr(27) + 'i' + 'Q' + hex(s) + hex(m) + hex(0) + hex(0) + hex(0) + hex(c) + hex(0)
+                    chr(27) + 'i' + 'Q' + options.decode("hex") + '1' + data
             )
-            sendstr += data
             self.send(sendstr)
         else:
             raise RuntimeError('Invalid parameters')
