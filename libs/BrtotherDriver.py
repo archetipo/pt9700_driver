@@ -8,6 +8,7 @@ import json
 import time
 import traceback
 
+
 from .printer import USBPrinter
 
 

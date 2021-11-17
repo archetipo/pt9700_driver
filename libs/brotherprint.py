@@ -7,6 +7,7 @@ printers without having to memorize the ESC/P commands. Also handles sending to 
 for you.
 """
 import re
+from io import BytesIO
 
 
 class BrotherPrint(object):
@@ -900,7 +901,7 @@ class BrotherPrint(object):
     ############################################################################
     # Qrcode
     ############################################################################
-    def qrcode(self, data, size="Prints 4 dots", model_type="MODEL2", correction="Standard level M"):
+    def qrcode(self, data, size="Prints 4 dots", model_type="MODEL2", correction="High-density level L"):
         """Print a QRcode in the specified format
 
         Args:
@@ -910,8 +911,8 @@ class BrotherPrint(object):
         size_choices = {'Prints 4 dots': 4,
                         'Prints 6 dots': 6,
                         'Prints 8 dots': 8,
-                        'Prints 10 dots ': 10,
-                        'Prints 12 dots ': 12}
+                        'Prints 10 dots': 10,
+                        'Prints 12 dots': 12}
 
         model_type_choices = {'MODEL1': 1,
                               'MODEL2': 2,
@@ -924,15 +925,21 @@ class BrotherPrint(object):
                               }
 
         sendstr = ''
+        file_str = BytesIO()
         if size in size_choices and model_type in model_type_choices and correction in correction_choices:
             s = size_choices[size]
             m = model_type_choices[model_type]
             c = correction_choices[correction]
-            options = '' + hex(s) + hex(m) + hex(0) + hex(0) + hex(0) + hex(c) + hex(0)
-            sendstr += (
-                    chr(27) + 'i' + 'Q' + options.decode("hex") + '1' + data
-            )
-            self.send(sendstr)
+            file_str = BytesIO()
+            file_str.write(chr(27))
+            file_str.write(b'iQ')
+            file_str.write(hex(s))
+            file_str.write(hex(m))
+            file_str.write(b'\x00\x00\x00\x00')
+            file_str.write(hex(c))
+            file_str.write(b'\x00')
+            file_str.write(data.encode())
+            self.send(file_str.getvalue())
         else:
             raise RuntimeError('Invalid parameters')
 
