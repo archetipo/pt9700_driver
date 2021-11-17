@@ -849,39 +849,39 @@ class BrotherPrint(object):
                             must be an even number b/w 2 and 20.
         """
 
-        barcodes = {'code39': '0',
-                    'itf': '1',
-                    'ean8/upca': '5',
-                    'upce': '6',
-                    'codabar': '9',
-                    'code128': 'a',
-                    'gs1-128': 'b',
-                    'rss': 'c'}
+        barcodes = {'code39': b'0',
+                    'itf': b'1',
+                    'ean8/upca': b'5',
+                    'upce': b'6',
+                    'codabar': b'9',
+                    'code128': b'a',
+                    'gs1-128': b'b',
+                    'rss': b'c'}
 
-        widths = {'xsmall': '0',
-                  'small': '1',
-                  'medium': '2',
-                  'large': '3'}
+        widths = {'xsmall': b'0',
+                  'small': b'1',
+                  'medium': b'2',
+                  'large': b'3'}
 
-        ratios = {'3:1': '0',
-                  '2.5:1': '1',
-                  '2:1': '2'}
+        ratios = {'3:1': b'0',
+                  '2.5:1': b'1',
+                  '2:1': b'2'}
 
-        rss_symbols = {'rss14std': '0',
-                       'rss14trun': '1',
-                       'rss14stacked': '2',
-                       'rss14stackedomni': '3',
-                       'rsslimited': '4',
-                       'rssexpandedstd': '5',
-                       'rssexpandedstacked': '6'
+        rss_symbols = {'rss14std': b'0',
+                       'rss14trun': b'1',
+                       'rss14stacked': b'2',
+                       'rss14stackedomni': b'3',
+                       'rsslimited': b'4',
+                       'rssexpandedstd': b'5',
+                       'rssexpandedstacked': b'6'
                        }
 
-        character_choices = {'off': '0',
-                             'on': '1'}
-        parentheses_choices = {'off': '1',
-                               'on': '0'}
-        equalize_choices = {'off': '0',
-                            'on': '1'}
+        character_choices = {'off': b'0',
+                             'on': b'1'}
+        parentheses_choices = {'off': b'1',
+                               'on': b'0'}
+        equalize_choices = {'off': b'0',
+                            'on': b'1'}
 
         sendstr = ''
         n2 = height // 256
