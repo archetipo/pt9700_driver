@@ -104,13 +104,13 @@ class USBPrinter(object):
             'paper': {},
         }
 
-        self.device.write(self.out_ep, DLE_EOT_PRINTER, self.interface)
+        self.device.write(self.out_ep, b'\x1BSi', self.interface)
         printer = self.__extract_status()
-        self.device.write(self.out_ep, DLE_EOT_OFFLINE, self.interface)
-        offline = self.__extract_status()
-        self.device.write(self.out_ep, DLE_EOT_ERROR, self.interface)
-        error = self.__extract_status()
-        self.device.write(self.out_ep, DLE_EOT_PAPER, self.interface)
+        # self.device.write(self.out_ep, DLE_EOT_OFFLINE, self.interface)
+        # offline = self.__extract_status()
+        # self.device.write(self.out_ep, DLE_EOT_ERROR, self.interface)
+        # error = self.__extract_status()
+        # self.device.write(self.out_ep, DLE_EOT_PAPER, self.interface)
         paper = self.__extract_status()
 
         status['printer']['status_code'] = printer
