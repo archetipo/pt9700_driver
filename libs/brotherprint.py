@@ -888,12 +888,15 @@ class BrotherPrint(object):
         n1 = height % 256
         if (format in barcodes and width in widths and ratio in ratios and characters in character_choices
                 and rss_symbol in rss_symbols):
-            sendstr += (chr(27) + b'it' + barcodes[format] + b'spr' + character_choices[characters] +
-                        b'u' + b'x' + b'y' + b'h' + chr(n1) + chr(n2) + b'w' + widths[width] + b'e' +
-                        parentheses_choices[parentheses] + b'o' + rss_symbols[rss_symbol] + b'c' + chr(horiz_char_rss) +
-                        b'z' + ratios[ratio] + b'f' + equalize_choices[equalize] + b'b' + data + chr(92))
+            sendstr += (
+                    chr(27).encode() + b'it' + barcodes[format] + b'spr' + character_choices[characters] +
+                    b'uxyh' + chr(n1).encode() + chr(n2).encode() + b'w' + widths[width] + b'e' +
+                    parentheses_choices[parentheses] + b'o' + rss_symbols[rss_symbol] + b'c' +
+                    chr(horiz_char_rss).encode() +
+                    b'z' + ratios[ratio] + b'f' + equalize_choices[equalize] + b'b' + data + chr(92).encode()
+            )
             if format in ['code128', 'gs1-128']:
-                sendstr += chr(92) + chr(92)
+                sendstr += chr(92).encode()  + chr(92).encode()
             self.send(sendstr)
         else:
             raise RuntimeError('Invalid parameters')
