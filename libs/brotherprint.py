@@ -933,8 +933,6 @@ class BrotherPrint(object):
             c = correction_choices[correction]
             file_str = BytesIO()
             file_str.write(b'\x1B')
-            file_str.write(b'iP20')
-            file_str.write(b'\x1B')
             file_str.write(b'iV')
             file_str.write(hex(s).encode())
             file_str.write(hex(m).encode())
