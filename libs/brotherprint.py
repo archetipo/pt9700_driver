@@ -896,7 +896,7 @@ class BrotherPrint(object):
                     b'z' + ratios[ratio] + b'f' + equalize_choices[equalize] + b'b' + data + chr(92).encode()
             )
             if format in ['code128', 'gs1-128']:
-                sendstr += chr(92).encode()  + chr(92).encode()
+                sendstr += chr(92).encode() + chr(92).encode()
             self.send(sendstr)
         else:
             raise RuntimeError('Invalid parameters')
@@ -927,21 +927,24 @@ class BrotherPrint(object):
                               'Ultra-high-reliability level': 4
                               }
 
-        sendstr = ''
-        file_str = BytesIO()
         if size in size_choices and model_type in model_type_choices and correction in correction_choices:
             s = size_choices[size]
             m = model_type_choices[model_type]
             c = correction_choices[correction]
             file_str = BytesIO()
             file_str.write(b'\x1B')
-            file_str.write(b'iQ')
+            file_str.write(b'iP20')
+            file_str.write(b'\x1B')
+            file_str.write(b'iV')
             file_str.write(hex(s).encode())
             file_str.write(hex(m).encode())
             file_str.write(b'\x00\x00\x00\x00')
             file_str.write(hex(c).encode())
             file_str.write(b'\x00')
             file_str.write(data)
+            file_str.write(chr(92).encode())
+            file_str.write(chr(92).encode())
+            file_str.write(chr(92).encode())
             self.send(file_str.getvalue())
         else:
             raise RuntimeError('Invalid parameters')
